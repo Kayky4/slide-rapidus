@@ -132,18 +132,23 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            /* Centralização base para desktop */
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%) scale(0.9) translateX(100px);
+            /* Ajuste inicial desktop */
         }
 
         .slide.active {
             opacity: 1;
-            transform: scale(1) translateX(0);
+            transform: translate(-50%, -50%) scale(1) translateX(0);
             pointer-events: all;
             z-index: 10;
         }
 
         .slide.prev {
             opacity: 0;
-            transform: scale(0.9) translateX(-100px);
+            transform: translate(-50%, -50%) scale(0.9) translateX(-100px);
             z-index: 5;
         }
 
@@ -267,19 +272,111 @@
             opacity: 0.6;
         }
 
+        .results-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             h1 {
-                font-size: 2.5rem;
+                font-size: 1.8rem;
+                margin-bottom: 0.8rem;
+                line-height: 1.1;
+                border-bottom-width: 0.5px;
+                padding-bottom: 0.5rem;
             }
 
             h2 {
-                font-size: 2rem;
+                font-size: 1.4rem;
+                margin-bottom: 0.6rem;
+            }
+
+            h3 {
+                font-size: 0.9rem;
+                margin-bottom: 0.4rem;
+                letter-spacing: 1px;
+            }
+
+            .slider-container {
+                align-items: flex-start;
+                padding-top: 4rem;
+                height: 100vh;
+                overflow: hidden;
             }
 
             .slide {
-                width: 90%;
+                width: 95%;
+                min-width: 95%;
                 padding: 1.5rem;
+                height: auto;
+                min-height: auto;
+                max-height: 75vh;
+                overflow-y: auto;
+                margin-top: 0;
+                transform-origin: center top;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -60%) scale(0.95);
+                opacity: 0;
+                border-radius: 16px;
+            }
+
+            .slide.active {
+                transform: translate(-50%, -60%) scale(1);
+                opacity: 1;
+            }
+
+            .slide.prev {
+                transform: translate(-150%, -60%) scale(0.9);
+            }
+
+            .content-wrapper {
+                font-size: 1rem;
+            }
+
+            li {
+                margin-bottom: 0.5rem;
+            }
+
+            .quote-box {
+                margin-top: 1.5rem;
+                padding: 1rem;
+                font-size: 0.95rem;
+            }
+
+            .results-grid {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+
+            .controls {
+                width: 100%;
+                justify-content: center;
+                gap: 2rem;
+                right: auto;
+                left: 0;
+                bottom: 2rem;
+                z-index: 30;
+            }
+
+            .nav-btn {
+                padding: 0.8rem;
+                background: var(--bg-color);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            }
+
+            .theme-toggle {
+                top: 1rem;
+                right: 1rem;
+                padding: 0.5rem;
+            }
+
+            .slide-counter {
+                display: none;
+                /* Hide counter on mobile to save space or move it */
             }
         }
 
@@ -367,7 +464,8 @@
                     <li>Cliente sem visibilidade clara do processo</li>
                 </ul>
                 <div class="quote-box">
-                    “O problema não é um sistema ruim. É a falta de um fluxo único e integrado que conecte toda a operação.”
+                    “O problema não é um sistema ruim. É a falta de um fluxo único e integrado que conecte toda a
+                    operação.”
                 </div>
             </div>
         </div>
@@ -395,7 +493,9 @@
             <h2 style="font-size: 3rem; margin-bottom: 2rem;">A Pergunta-Chave</h2>
             <h1>E se tudo isso estivesse conectado?</h1>
             <div class="quote-box" style="margin-top: 3rem;">
-                “E se todos os setores trabalhassem em cima da mesma informação, em tempo real? E se cada pessoa soubesse exatamente o que precisa fazer, quando fazer, e tivesse todas as informações necessárias na palma da mão?”
+                “E se todos os setores trabalhassem em cima da mesma informação, em tempo real? E se cada pessoa
+                soubesse exatamente o que precisa fazer, quando fazer, e tivesse todas as informações necessárias na
+                palma da mão?”
             </div>
         </div>
 
@@ -413,7 +513,8 @@
                     </li>
                 </ul>
                 <div class="quote-box">
-                    “Não é sobre tecnologia. É sobre fluxo. Conectando pessoas, processos e informações de forma natural e eficiente.”
+                    “Não é sobre tecnologia. É sobre fluxo. Conectando pessoas, processos e informações de forma natural
+                    e eficiente.”
                 </div>
             </div>
         </div>
@@ -423,7 +524,7 @@
             <h3>Resultados Esperados</h3>
             <h2>O que isso gera na prática</h2>
             <div class="content-wrapper">
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;">
+                <div class="results-grid">
                     <div>
                         <ul>
                             <li>Menos erros</li>

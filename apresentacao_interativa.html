@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAPIDUS - Apresentação</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Light Mode (Default) */
+            --bg-color: #f1f5f9;
+            --text-color: #1e293b;
+            --accent-color: #0284c7;
+            --secondary-accent: #6366f1;
+            --glass-bg: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(0, 0, 0, 0.1);
+            --slide-transition: 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            --quote-bg: rgba(2, 132, 199, 0.1);
+            --orb-opacity: 0.2;
+            --heading-gradient: linear-gradient(to right, #1e293b, #475569);
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #0f172a;
+            --text-color: #f8fafc;
+            --accent-color: #38bdf8;
+            --secondary-accent: #818cf8;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --quote-bg: rgba(56, 189, 248, 0.1);
+            --orb-opacity: 0.4;
+            --heading-gradient: linear-gradient(to right, #fff, #94a3b8);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            position: relative;
+        }
+
+        /* Animated Background */
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: var(--bg-color);
+            transition: background 0.5s ease;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: var(--orb-opacity);
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--accent-color);
+            top: -100px;
+            right: -100px;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 300px;
+            height: 300px;
+            background: var(--secondary-accent);
+            bottom: -50px;
+            left: -50px;
+            animation-delay: -5s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(30px, 50px);
+            }
+        }
+
+        /* Slides Container */
+        .slider-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 1000px;
+        }
+
+        .slide {
+            position: absolute;
+            width: 80%;
+            max-width: 1000px;
+            height: auto;
+            min-height: 60vh;
+            padding: 3rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transform: scale(0.9) translateX(100px);
+            transition: all var(--slide-transition);
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: scale(1) translateX(0);
+            pointer-events: all;
+            z-index: 10;
+        }
+
+        .slide.prev {
+            opacity: 0;
+            transform: scale(0.9) translateX(-100px);
+            z-index: 5;
+        }
+
+        /* Typography & Layout */
+        h1,
+        h2 {
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            background: var(--heading-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--accent-color);
+            -webkit-text-fill-color: initial;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .content-wrapper {
+            font-size: 1.25rem;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+
+        ul {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        li::before {
+            content: "•";
+            color: var(--accent-color);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .quote-box {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: var(--quote-bg);
+            border-left: 4px solid var(--accent-color);
+            border-radius: 8px;
+            font-style: italic;
+            font-size: 1.1rem;
+        }
+
+        .highlight {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        /* Navigation Controls */
+        .controls {
+            position: absolute;
+            bottom: 2rem;
+            right: 3rem;
+            display: flex;
+            gap: 1rem;
+            z-index: 20;
+        }
+
+        .nav-btn {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--text-color);
+            padding: 1rem;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-btn:hover {
+            background: var(--accent-color);
+            border-color: var(--accent-color);
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+        }
+
+        .progress-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 4px;
+            background: var(--accent-color);
+            width: 0%;
+            transition: width 0.3s ease;
+            box-shadow: 0 0 10px var(--accent-color);
+        }
+
+        .slide-counter {
+            position: absolute;
+            bottom: 2.5rem;
+            left: 3rem;
+            font-size: 0.9rem;
+            opacity: 0.6;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .slide {
+                width: 90%;
+                padding: 1.5rem;
+            }
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 2rem;
+            right: 3rem;
+            z-index: 50;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--text-color);
+            padding: 0.75rem;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-toggle:hover {
+            background: var(--accent-color);
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="background">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+    </div>
+
+    <button class="theme-toggle" id="themeToggle" aria-label="Alternar Tema">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            id="themeIcon">
+            <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+        </svg>
+    </button>
+
+    <div class="slider-container" id="slider">
+        <!-- Slide 1 -->
+        <div class="slide active">
+            <h3>RAPIDUS</h3>
+            <h1>Organização, comunicação e eficiência operacional em um único fluxo</h1>
+            <p style="margin-top: 1rem; opacity: 0.8; letter-spacing: 1px;">Apresentação e Diagnóstico - Açomix</p>
+            <div class="quote-box">
+                “Hoje a ideia não é apresentar um sistema pronto, nem falar de valores. A ideia é entender se existe um
+                problema real aqui que vale a pena ser resolvido de forma definitiva.”
+            </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="slide">
+            <h3>A Realidade Atual</h3>
+            <h2>Como as coisas funcionam hoje</h2>
+            <div class="content-wrapper">
+                <ul>
+                    <li>Múltiplos setores operando em paralelo</li>
+                    <li>Comunicação fragmentada:
+                        <ul style="padding-left: 2rem; margin-top: 0.5rem; font-size: 0.9em; opacity: 0.8;">
+                            <li>E-mail, Planilhas, WhatsApp, Papel</li>
+                        </ul>
+                    </li>
+                    <li>Informações espalhadas</li>
+                    <li>Dependência excessiva de pessoas específicas</li>
+                </ul>
+                <div class="quote-box">
+                    “Isso funciona. Mas funciona com custo de tempo, energia e oportunidades perdidas a cada dia.”
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="slide">
+            <h3>Onde o Caos Nasce</h3>
+            <h2>Pontos de ruptura no dia a dia</h2>
+            <div class="content-wrapper">
+                <ul>
+                    <li>Informações duplicadas e erros de comunicação</li>
+                    <li>Retrabalho constante entre setores</li>
+                    <li>Dificuldade de rastrear o status real dos pedidos</li>
+                    <li>Motoristas desconectados do sistema central</li>
+                    <li>Cliente sem visibilidade clara do processo</li>
+                </ul>
+                <div class="quote-box">
+                    “O problema não é um sistema ruim. É a falta de um fluxo único e integrado que conecte toda a operação.”
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="slide">
+            <h3>Impactos Invisíveis</h3>
+            <h2>O custo invisível da desorganização</h2>
+            <div class="content-wrapper">
+                <ul>
+                    <li>Tempo perdido todos os dias</li>
+                    <li>Erros que geram custo e retrabalho</li>
+                    <li>Atrasos frustrantes nas entregas</li>
+                    <li>Stress operacional: apagando incêndios</li>
+                    <li>Cliente ligando para perguntar status</li>
+                </ul>
+                <div class="quote-box" style="border-color: #ef4444; background: rgba(239, 68, 68, 0.1);">
+                    “Quando a operação cresce, esses problemas crescem junto. E eles ficam caros.”
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5 -->
+        <div class="slide" style="text-align: center; align-items: center;">
+            <h2 style="font-size: 3rem; margin-bottom: 2rem;">A Pergunta-Chave</h2>
+            <h1>E se tudo isso estivesse conectado?</h1>
+            <div class="quote-box" style="margin-top: 3rem;">
+                “E se todos os setores trabalhassem em cima da mesma informação, em tempo real? E se cada pessoa soubesse exatamente o que precisa fazer, quando fazer, e tivesse todas as informações necessárias na palma da mão?”
+            </div>
+        </div>
+
+        <!-- Slide 6 -->
+        <div class="slide">
+            <h3>A Visão RAPIDUS</h3>
+            <h2>Uma operação integrada, simples e rastreável</h2>
+            <div class="content-wrapper">
+                <ul>
+                    <li><strong>Sistema Web Único</strong> para todos os setores</li>
+                    <li><strong>App para Motoristas</strong>, conectado à operação</li>
+                    <li><strong>Comunicação Automática</strong> com o cliente</li>
+                    <li>Cada pedido com:
+                        <span class="highlight">Status claro, Responsável, Histórico e Rastreabilidade</span>
+                    </li>
+                </ul>
+                <div class="quote-box">
+                    “Não é sobre tecnologia. É sobre fluxo. Conectando pessoas, processos e informações de forma natural e eficiente.”
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7 -->
+        <div class="slide">
+            <h3>Resultados Esperados</h3>
+            <h2>O que isso gera na prática</h2>
+            <div class="content-wrapper">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;">
+                    <div>
+                        <ul>
+                            <li>Menos erros</li>
+                            <li>Menos atrasos</li>
+                            <li>Mais controle</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul>
+                            <li>Mais produtividade</li>
+                            <li>Menos stress</li>
+                            <li>Melhor experiência do cliente</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8 -->
+        <div class="slide">
+            <h3>Importante Deixar Claro</h3>
+            <h2>O RAPIDUS não é um produto pronto</h2>
+            <div class="content-wrapper">
+                <ul>
+                    <li>Cada empresa funciona de um jeito único</li>
+                    <li>A solução precisa refletir a operação real da Açomix</li>
+                    <li>O que mostramos é uma <strong>visão</strong>, não um pacote fechado</li>
+                </ul>
+                <div class="quote-box">
+                    “A solução só faz sentido se fizer sentido para vocês e para quem vai usar todo dia.”
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9 -->
+        <div class="slide">
+            <h3>Próximo Passo Proposto</h3>
+            <h2>Diagnóstico e Briefing</h2>
+            <div class="content-wrapper">
+                <ul>
+                    <li><strong>Fase 1: Entender</strong>
+                        <br>Fluxos reais, Gargalos, Exceções e Necessidades
+                    </li>
+                    <li><strong>Fase 2: Elaborar</strong>
+                        <br>Desenhar solução final, Definir escopo e Proposta
+                    </li>
+                </ul>
+                <div class="quote-box">
+                    “Hoje não é dia de proposta. É dia de entendimento da operação.”
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10 -->
+        <div class="slide" style="text-align: center; align-items: center;">
+            <h3 style="margin-bottom: 2rem;">Encerramento</h3>
+            <h1>Isso que mostramos hoje é um problema real para vocês?</h1>
+            <p style="margin-top: 2rem; font-size: 1.5rem; opacity: 0.8;">Se for, faz sentido avançarmos para o
+                diagnóstico completo?</p>
+        </div>
+
+    </div>
+
+    <!-- UI Elements -->
+    <div class="slide-counter">1 / 10</div>
+
+    <div class="controls">
+        <button class="nav-btn" id="prevBtn" aria-label="Anterior">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M15 19l-7-7 7-7" />
+            </svg>
+        </button>
+        <button class="nav-btn" id="nextBtn" aria-label="Próximo">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 5l7 7-7 7" />
+            </svg>
+        </button>
+    </div>
+
+    <div class="progress-bar" id="progress"></div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const progress = document.getElementById('progress');
+        const counter = document.querySelector('.slide-counter');
+
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+
+        function updateSlides() {
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active', 'prev');
+                if (index === currentSlide) {
+                    slide.classList.add('active');
+                } else if (index < currentSlide) {
+                    slide.classList.add('prev');
+                }
+            });
+
+            // Update Progress
+            const progressWidth = ((currentSlide + 1) / totalSlides) * 100;
+            progress.style.width = `${progressWidth}%`;
+
+            // Update Counter
+            counter.textContent = `${currentSlide + 1} / ${totalSlides}`;
+
+            // Button State
+            prevBtn.style.opacity = currentSlide === 0 ? '0.5' : '1';
+            nextBtn.style.opacity = currentSlide === totalSlides - 1 ? '0.5' : '1';
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                updateSlides();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlides();
+            }
+        }
+
+        // Event Listeners
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+
+        // Keyboard Navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.code === 'Space') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        // Initialize
+        updateSlides();
+
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+
+        // Check for saved theme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+        }
+
+        function updateThemeIcon(theme) {
+            if (theme === 'dark') {
+                // Show Sun (to switch to light)
+                themeIcon.innerHTML = '<path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />';
+            } else {
+                // Show Moon (to switch to dark)
+                themeIcon.innerHTML = '<path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>';
+            }
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        });
+    </script>
+</body>
+
+</html>

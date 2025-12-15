@@ -369,9 +369,13 @@
             }
 
             .theme-toggle {
-                top: 1rem;
-                right: 1rem;
-                padding: 0.5rem;
+                position: static !important;
+                top: auto !important;
+                right: auto !important;
+                padding: 0.8rem;
+                background: var(--bg-color);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                margin: 0;
             }
 
             .slide-counter {
@@ -381,7 +385,8 @@
         }
 
         .theme-toggle {
-            position: absolute;
+            position: fixed;
+            /* Fixa no topo direito em desktop */
             top: 2rem;
             right: 3rem;
             z-index: 50;
@@ -411,12 +416,7 @@
         <div class="orb orb-2"></div>
     </div>
 
-    <button class="theme-toggle" id="themeToggle" aria-label="Alternar Tema">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            id="themeIcon">
-            <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
-        </svg>
-    </button>
+
 
     <div class="slider-container" id="slider">
         <!-- Slide 1 -->
@@ -597,6 +597,14 @@
                 <path d="M15 19l-7-7 7-7" />
             </svg>
         </button>
+
+        <button class="theme-toggle" id="themeToggle" aria-label="Alternar Tema">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                id="themeIcon">
+                <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+            </svg>
+        </button>
+
         <button class="nav-btn" id="nextBtn" aria-label="Próximo">
             <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M9 5l7 7-7 7" />

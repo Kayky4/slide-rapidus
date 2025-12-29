@@ -280,7 +280,54 @@
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
+        /* Tablet (Portrait & Landscape: 768px - 1024px) */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            h1 {
+                font-size: 2.8rem;
+                margin-bottom: 1.2rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+                margin-bottom: 1rem;
+            }
+
+            h3 {
+                font-size: 1.2rem;
+            }
+
+            .slide {
+                width: 90%;
+                max-width: 90%;
+                padding: 2.5rem;
+                min-height: 50vh;
+                /* Ensure content fits, scroll if necessary */
+                max-height: 85vh;
+                overflow-y: auto;
+            }
+
+            .content-wrapper {
+                font-size: 1.1rem;
+            }
+
+            .controls {
+                right: 2rem;
+                bottom: 2rem;
+            }
+
+            .theme-toggle {
+                top: 1.5rem;
+                right: 2rem;
+            }
+
+            /* Adjust results grid for narrower tablets */
+            .results-grid {
+                gap: 0.8rem;
+            }
+        }
+
+        /* Mobile (Phones: < 768px) */
+        @media (max-width: 767px) {
             h1 {
                 font-size: 1.8rem;
                 margin-bottom: 0.8rem;
